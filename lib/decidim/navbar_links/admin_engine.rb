@@ -14,6 +14,12 @@ module Decidim
         root to: "navbar_links#index"
       end
 
+      initializer "decidim_navbar_links extends" do
+        Dir.glob("#{Decidim::NavbarLinks::Engine.root}/lib/extends/navbar_links/**/*.rb").each do |override|
+          require_dependency override
+        end
+      end
+
       initializer "decidim_navbar_links.admin_mount_routes" do
         Decidim::Core::Engine.routes do
           mount Decidim::NavbarLinks::AdminEngine, at: "/admin", as: "decidim_admin_navbar_links"

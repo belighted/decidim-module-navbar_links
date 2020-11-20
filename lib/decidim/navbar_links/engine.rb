@@ -9,6 +9,12 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::NavbarLinks
 
+      initializer "decidim_navbar_links extends" do
+        Dir.glob("#{Decidim::NavbarLinks::Engine.root}/lib/extends/navbar_links/**/*.rb").each do |override|
+          require_dependency override
+        end
+      end
+
       initializer "decidim.menu" do
         Decidim.menu :menu do |menu|
           NavbarLink.organization(current_organization).each do |navbar_link|
