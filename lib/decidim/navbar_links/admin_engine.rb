@@ -14,6 +14,16 @@ module Decidim
         root to: "navbar_links#index"
       end
 
+      initializer "decidim_navbar_links.admin_settings_menu" do
+        Decidim.menu :admin_settings_menu do |menu|
+          menu.item I18n.t("admin.menu.navbar_links", scope: "decidim_navbar_links"),
+                    decidim_admin_navbar_links.navbar_links_path,
+                    position: 1.25,
+                    active: [%w(decidim/admin/navbar_links), []],
+                    if: allowed_to?(:update, :organization, organization: current_organization)
+        end
+      end
+
       initializer "decidim_navbar_links extends" do
         Dir.glob("#{Decidim::NavbarLinks::Engine.root}/lib/extends/navbar_links/**/*.rb").each do |override|
           require_dependency override
