@@ -3,27 +3,27 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_VERSION = '0.22.0'
+DECIDIM_VERSION = "0.24.2"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-navbar_links", path: "."
 
-gem "bootsnap"
-gem "puma", ">= 4.3.3"
+gem "bootsnap", "~> 1.4"
+gem "puma", "< 6"
 gem "uglifier", "~> 4.1"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", DECIDIM_VERSION
-  gem "faker", "~> 1.9"
+  gem "faker", "~> 2.14"
   gem "rubocop-performance"
   gem "simplecov", require: false
 end
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
+  gem "letter_opener_web", "~> 1.4", ">= 1.4.0"
   gem "listen", "~> 3.1"
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console", "~> 3.5"
+  gem "web-console", "~> 3.7", ">= 3.7.0"
 end
